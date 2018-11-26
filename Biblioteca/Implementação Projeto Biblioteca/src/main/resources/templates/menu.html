@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width" />
+	<title>Menu Principal Biblioteca</title>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"></link>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+   <style type="text/css">
+    #posicao{
+     position:relative;
+      top: 0; 
+      left: 40%; 
+      right: auto;
+    }
+    
+     #Imagem{ 
+    
+    	background: url('https://images8.alphacoders.com/379/379448.jpg') no-repeat; 
+    	right:auto;
+    	left:auto;
+    	heigth:auto;
+    	width:auto;
+    	
+      }
+      
+      #est tr:not(:first-child):hover {
+        background: #E8E8E8;
+      }
+      
+      #mensagem{
+        position:relative;
+        right:auto;
+    	left:20%;
+    	heigth:auto;
+    	width:auto;
+      
+      }
+   
+   
+   </style>
+</head>
+<body >
+    
+      <div class="panel panel-default">
+		<div class="panel-heading">
+			<strong id="posicao"><b>Menu Principal Biblioteca</b></strong>
+		</div>
+		
+		<div class="panel-body">
+		
+      
+       <div   id="Imagem">
+			
+				<table  class="table table-sm table-striped table-hover table-borderless " id="est">
+				 <thead>
+				        <tr></tr>
+	
+						<tr>
+							<th>Cadastrar Autor</th>
+							<td><a th:href="@{/autor/}" class="btn btn-sm btn-primary"><b>Cadastrar</b></a> </td>
+						</tr>
+					
+						 <tr> 
+						    <th>Cadastrar Editora</th>
+							<td><a th:href="@{/editora/}" class="btn btn-sm btn-warning"><b>Cadastrar</b></a> </td>
+					     </tr>
+							
+						  <tr>	
+							<th>Cadastrar Empréstimo</th>
+							<td><a th:href="@{/emprestimo/}" class="btn btn-sm btn-primary"><b>Cadastrar</b></a> </td>
+					      </tr>
+						  
+						   <tr>
+							<th>Cadastrar Livro</th>
+							<td><a th:href="@{/livro/}" class="btn btn-sm btn-warning"><b>Cadastrar</b></a> </td>
+						  </tr>
+							
+						   <tr>
+							<th>Cadastrar Pessoa</th>
+							<td><a th:href="@{/pessoa/}" class="btn btn-sm btn-primary"><b>Cadastrar</b></a> </td>
+						  </tr>
+						  
+						   <tr>
+							<th>Cadastrar Resenha</th>
+							<td><a th:href="@{/resenha/}" class="btn  btn-sm btn-warning"><b>Cadastrar</b></a> </td>
+						  </tr>
+					
+					</thead>
+                  	</table>
+                  
+                 </div>
+               </div>
+             </div>
+             <div id="mensagem">
+            <p>Disciplina:Projetos Orientado a Objeto; Professor:André; Projeto:Biblioteca; Dupla:Bruna e Julio</p> 
+           </div>
+</body>
+</html>

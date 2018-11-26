@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width" />
+	<title>Cadastro de Livro</title>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"></link>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
+     
+     <style type="text/css">
+      #Imagem{ 
+    
+    	 background: url('https://images8.alphacoders.com/379/379448.jpg') no-repeat; 
+    	right:auto;
+    	left:auto;
+    	heigth:auto;
+    	width:auto;
+    	background-size: auto;
+      }
+    </style>
+
+</head>
+<body>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<strong>Cadastro de Livro</strong>
+		</div>
+		<div class="panel-body" id="Imagem">
+			<form class="form-horizontal" th:object="${livro}" th:action="@{/livro/save}" method="POST" style="margin: 10px">
+				<div class="form-group">
+ 					<fieldset>
+						<div class="form-group row">
+							<div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
+								<div th:each="detailedError : ${#fields.detailedErrors()}">
+									<span th:text="${detailedError.message}"></span>
+								</div>
+							</div>
+						</div> 					
+						<div class="form-group row">
+						    <div class="col-md-1">
+						        <label>Registro do Livro</label>
+						        <input type="text" class="form-control input-sm" id="id" th:field="*{id}" readOnly="readonly"/>
+						    </div>
+						 </div>
+						
+						<div class="form-group row">                                                          
+							<div class="col-md-4" th:classappend="${#fields.hasErrors('nome')}? 'has-error'">
+							    <label>Nome do Livro</label>
+							    <input type="text" style="text-transform: capitalize;" class="form-control input-sm" th:field="*{nome}" required="required" placeholder="Informe o Nome do Livro..." autofocus="autofocus"  maxlength="50"/>
+							     <font color="#8B0000" size="2px"><i>Digitos Válidos Ex:AaBbCc...</i></font>
+							       <script type="text/javascript">
+							          $(function(){
+							    	     $("#nome").focusout(function(){
+							    	         var quebra = $(this).val().trim().split(/\s{1,}/);
+							    	        
+							    	           for(var i in quebra){
+							    	               quebra[i] = quebra[i].substr(0, 1).toUpperCase() + quebra[i].substring(1, quebra[i].length); 
+							    	           }
+							    	        
+							    	            var nome = "";
+							    	            for(var i in quebra)
+							    	              nome = nome + ' ' + quebra[i];
+							    	        
+							    	             $(this).val(nome.trim());
+							    	         });
+							    	      });
+							      </script>
+							</div>
+						</div>
+						<div class="form-group row">
+							<div class="col-md-4" th:classappend="${#fields.hasErrors('ano')}? 'has-error'">
+								<label>Ano de Publicação</label> 
+								<input type="text" pattern="[0-9]{4}$" class="form-control input-sm" th:field="*{ano}" placeholder="Informe a Data de Publicação..."  required="required" autofocus="autofocus" minlength="4" maxlength="4" />
+							     <font color="#8B0000" size="2px"><i>Digitos Válidos Ex:123456789</i></font>
+							    <script type="text/javascript">
+                                   $("#ano").mask("0000");
+                                </script>
+							</div>
+						</div>
+						<div class="form-group row">
+							<div class="col-md-4" th:classappend="${#fields.hasErrors('edicao')}? 'has-error'">
+								<label>Edição</label> 
+								<input type="text" pattern="((\b[A-zÀ-ú'0-9\s]{2,40}\b))+$" class="form-control input-sm" th:field="*{edicao}"  placeholder="Informe a Edição do Livro..."  required="required"  autofocus="autofocus" minlength="3" maxlength="9"/>
+							    <font color="#8B0000" size="2px"><i>Digitos Válidos Ex:AaBc123...</i></font>
+							 </div>
+						</div>
+					    <div class="form-group row">
+							<div class="col-md-4" th:classappend="${#fields.hasErrors('qtdpg')}? 'has-error'">
+								<label>Quantidade de Páginas</label> 
+								<input type="text" pattern="[0-9]+$" class="form-control input-sm" th:field="*{qtdpg}" placeholder="Informe a Quantidade de Páginas"  required="required" autofocus="autofocus" minlength="2" maxlength="999" />
+							    <font color="#8B0000" size="2px"><i>Digitos Válidos Ex:123456789...</i></font>
+							</div>
+						</div>	
+						
+						<div class="form-group row">
+							<div class="col-md-4" th:classappend="${#fields.hasErrors('autor')}? 'has-error'">
+							<label>Autor</label> 
+								<select id="autor" th:field="*{autor}" class="form-control input-sm">
+								    <option value="">Selecione o Autor</option>
+								    <option th:each="autor : ${autores}"  th:value="${autor.id}" th:text="${autor.nome}" selected="selected"></option>
+							    </select>
+						    </div>
+						</div>	
+						
+						<div class="form-group row">
+							<div class="col-md-4" th:classappend="${#fields.hasErrors('editora')}? 'has-error'">
+							<label>Editora</label> 
+								<select id="editora" th:field="*{editora}" class="form-control input-sm">
+								    <option value="">Selecione a Editora</option>
+								    <option th:each="editora : ${editoras}"  th:value="${editora.id}" th:text="${editora.nome}" selected="selected"></option>
+							    </select>
+						    </div>
+						</div>					
+				 
+				  </fieldset>
+				</div>
+				<div class="form-group row">
+					<button type="submit" class="btn btn-sm btn-primary"><b>Salvar</b></button>
+					<a th:href="@{/livro/}" class="btn btn-sm btn-default"><b>Cancelar</b></a>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>
